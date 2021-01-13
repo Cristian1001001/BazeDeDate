@@ -10,14 +10,24 @@ isset($id) ? $rs = $manager->getProductByRestaurant($id) : $rs = $manager->getPr
  <div class="row">
 <?php
 foreach ($rs as $r):?>
-<div class="col-2">
-<div class="prod-card">
-  <img src='<?php echo $r->ImagePath ?>' alt="Denim Jeans" style="width:100%">
-  <h1><?php echo $r->ProductName ?></h1>
-  <p class="price"><?php $r->Price ?></p>
-  <p><button>Add to Cart</button></p>
+
+<div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-4">
+
+<div class="prod-card h-100">
+    <div class="img-thumbnail">
+  <img src='<?php echo $r->ImagePath ?>' alt="Denim Jeans" >
+    </div>
+    <div class="nume">
+        <h4><?php echo $r->ProductName ?></h4>
+    </div>
+  <h6 class="price"><?php $r->Price ?></h6>
+    <form name="shopcart" action="../server/shopping_cart.php" method="post">
+  <p><button type="submit" name="shop" value="<?php echo $r->ProductID ?>">Add to Cart</button></p>
+    </form>
 </div>
+
 </div>
+
 <?php endforeach; ?>
  </div>
 </div>

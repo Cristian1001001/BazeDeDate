@@ -1,3 +1,4 @@
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,19 +17,23 @@
 <body>
 <?php
 include_once 'config/init.php';
-$alert_msg = isset($_GET['new_user_message']) ? $_GET['new_user_message'] : null;
+$alert_msg = isset($_GET['alert_msg']) ? $_GET['alert_msg'] : null;
 $user = isset($_GET['username']) ? $_GET['username'] : null;
 if(isset($alert_msg)){
     if($alert_msg==USER_NOT_FOUND){
-        $msg = "User with this username already exists";
+        $msg = "User with this username doesn't exist";
         alertPHP($msg);
     }
-    elseif($alert_msg==PASSWORD_NOT_MATCH){
+    elseif($alert_msg==PASSWORD_WRONG){
         $msg = "Password doesn't match!";
         alertPHP($msg);
     }
+    elseif($alert_msg == NEW_PASS_EMAIL){
+        $msg = "New pass was send to email";
+        alertPHP($msg);
+    }
     elseif($alert_msg==NEW_USER_OK){
-        $msg = "User create with success";
+        $msg = "User created with success";
         alertPHPBack($msg);
     }
 }
@@ -41,29 +46,15 @@ if(isset($alert_msg)){
                 <img src="../assets/icon.svg">
             </div>
             <div class="col-12 form-input">
-                <form action="../server/new-user-check.php" method="post">
+                <form action="../server/auth.php" method="post">
                     <div class="form-group">
-                        <input type="text" name="firstname" class="form-control" placeholder="Enter First Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="lastname" class="form-control" placeholder="Enter Last Name" required>
+                        <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="email" class="form-control" placeholder="Enter E-mail" required>
+                        <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
                     </div>
-                    <div>
-                        <div class="form-group">
-                            <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password_repeat" class="form-control" placeholder="Repeat Password" required>
-                    </div>
-                    <button type="submit" name="btn_submit" class="btn btn-success">Create</button>
+                    <button type="submit" name="btn_submit" class="btn btn-success">Login</button>
+                    <div><a style="color: white" href="forgot_pass.php"><u>Forgot Pass?</u></a></div>
                 </form>
             </div>
 
@@ -72,3 +63,5 @@ if(isset($alert_msg)){
 </div>
 </body>
 </html>
+
+

@@ -10,7 +10,8 @@ $manager = new Restaurants();
 $rs = $manager->getRestaurant();
 foreach($rs as $r):
 ?>
-        <div class="card-group">
+
+    <div class="card-group ">
     <div class="RestCard">
         <div class="card" style="width: 16rem;">
             <a href=<?php echo "shop-grid.php?cat=".$r->RestaurantsID?>>
